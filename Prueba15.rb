@@ -1,25 +1,61 @@
-students = [[["Eliezer", 7], ["Mariam", 7], ["Deborah", 10], ["Harley", 7]],
- [["D'angelo", 10], ["Brittany", 8], ["Hubert", 7], ["Erling", 9]],
- [["Bradford", 7], ["Theodora", 10], ["Casandra", 9], ["Lindsay", 8]],
- [["Hilma", 10], ["Lina", 10], ["Isabell", 8], ["Urban", 9]]]
+# Dado un array de números imprime únicamente los elementos que contienen un indice impar
+# Utiliza: Enumerable#each_with_index
+def print_odd_indexed_integers(array)
+  array.each_with_index {|val,index| 
+   puts val if index % 2 != 0   
+}
+end
 
-def best_students(students)
-  best_students = []
-    x, y = 0, 0
+# Dado un array de números regresa un array con solo sol numeros impares
+# Utiliza: Enumerable#select
+def odd_integers(array)
+	array.select{|num| num % 2 != 0}
+end
 
-     while y < students.length
-      current_student  = students[y][x]
+# Dado un array y un límite regresa el primer numero que sea menor al límite 
+# Utiliza: Enumerable#find
+def first_under(array, limit)
+	array.find{|i| i < limit}
+end
 
-      best_students.push(current_student[0]) if current_student[1] == 10
-      
-        if x == (students[y].length - 1)
-          x = 0
-          y += 1
-        else
-          x += 1
-      end
-    end
-  best_students
-end 
 
-p best_students(students) == ["Deborah","D'angelo","Theodora","Hilma","Lina"]
+# Dado un array de strings y regresa un nuevo array donde todos los elementos contengan al final un signo de admiración. 
+# Utiliza: Enumerable#map
+def add_bang(array)
+	array.map {|i| "#{i}!"}
+end
+
+# Dado un array de números calcula la suma de todos sus elementos. 
+# Utiliza: Enumerable#reduce
+# Repite el ejercicio con Enumerable#inject
+def sum(array)
+	array.reduce(:+)
+	array.inject {|x,y| x + y}
+end
+
+
+# Dado un array de string reorganizalo en grupos de tres y ordénalos alfabéticamente.  
+# Utiliza: Enumerable#each_slice
+def sorted_triples(array)
+ñ = array.each_slice(3).to_a
+j = []
+ñ.each {|i| j << i.sort}
+j
+end
+
+# Driver code... no modifiques nada de este código 
+print_odd_indexed_integers([2, 4, 6, 8, 10, 12]) 
+# => 4
+# => 8
+# => 12
+
+puts odd_integers([3, 4, 7, 9, 10, 16]) == [3, 7, 9]
+
+puts first_under([13, 21, 7, 0, 11, 106], 10) == 7
+
+puts add_bang(["hi", "mom"]) == ["hi!", "mom!"]
+
+puts sum([1, 1, 2, 3, 5]) == 12
+
+words = %w(De esta simple manera se puede reorganizar una oración)  
+p sorted_triples(words) == [["De", "esta", "simple"], ["manera", "puede", "se"], ["oración", "reorganizar", "una"]]   
